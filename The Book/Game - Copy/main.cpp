@@ -26,16 +26,28 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	// Set renderer config
 	SDL_SetRenderDrawColor(g_pRenderer_, 0, 0, 0, 255); // Set renderer black
 
+	// Load texture into memory
+	SDL_Surface* temp_surface = SDL_LoadBMP("assets/animal.bmp");
+	texture_ = SDL_CreateTextureFromSurface(g_pRenderer_, temp_surface);
+	SDL_FreeSurface(temp_surface);
+
+	// Set rect x, y. set w, h same as source rect
+	destRect_.x = sourceRect_.x = 0;
+	destRect_.y = sourceRect_.y = 0;
+	destRect_.w = sourceRect_.w = 96;
+	destRect_.h = sourceRect_.h = 64;
+
 	cout << "Initilised successfully." << endl;
 }
 
 void Game::update() {
-	//
+	sourceRect_.x = 96 * int((SDL_GetTicks() / 100)%6);
 }
 
 void Game::render() {
 	// Refresh renderer black
 	SDL_RenderClear(g_pRenderer_);
+	SDL_RenderCopy(g_pRenderer_, texture_, &sourceRect_, &destRect_); // render image
 	SDL_RenderPresent(g_pRenderer_);
 }
 

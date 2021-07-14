@@ -28,4 +28,7 @@ class Game {
 		bool g_bRunning_ = true;
 		SDL_Window* g_pWindow_;
 		SDL_Renderer* g_pRenderer_;
+
+		SDL_Texture* texture_;
+		SDL_Rect sourceRect_, destRect_;
 };

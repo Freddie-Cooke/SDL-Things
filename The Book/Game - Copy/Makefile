@@ -9,7 +9,7 @@ INCLUDE = -IF:\Documents\Computing\Languages\C++\Libraries\SDL2\include\SDL2
 
 LIB = -LF:\Documents\Computing\Languages\C++\Libraries\SDL2\lib
 
-CFLAGS = -w -Wl,-subsystem,windows
+CFLAGS = #-w -Wl,-subsystem,windows
 
 LINKER_FLAGS = -lmingw32 -lSDL2main -lSDL2
 

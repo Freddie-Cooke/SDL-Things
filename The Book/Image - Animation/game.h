@@ -19,15 +19,17 @@ class Game {
 		void clean();
 
 		// Accessors
-		bool running() { return g_bRunning_; }
+		bool running() { return running_; }
 
 		// Mutators
-		void setRunning( bool value ) { g_bRunning_ = value; }
+		void setRunning( bool value ) { running_ = value; }
 
 	private:
-		bool g_bRunning_ = true;
-		SDL_Window* g_pWindow_;
-		SDL_Renderer* g_pRenderer_;
+		bool running_;
+		SDL_Window* window_;
+		SDL_Renderer* renderer_;
+
+		int color_int_ = 0;
 
 		SDL_Texture* texture_;
 		SDL_Rect sourceRect_, destRect_;

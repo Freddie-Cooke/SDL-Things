@@ -54,26 +54,18 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		cout << "Failed to load image" << endl;
 	}
 
-	// Initilise game objects	
-	player_ = new Player();
-	enemy_ = new Enemy();
-
-	gameObjects_.push_back(player_);
-	gameObjects_.push_back(enemy_);
- 
-	player_->load(0, 0, 96, 64, "ani");
-	enemy_->load(100, 100, 96, 64, "ani");
+	// Load game objects
+	player_.load(0, 0, 96, 64, "ani");
+	player2_.load(100, 100, 96, 64, "ani");
 
 	cout << "Initilised successfully." << endl;
 	return true;
 }
 
 void Game::update() {
-	ticks_ = SDL_GetTicks();
-	for (auto i = 0; i != gameObjects_.size();i++) {
-		gameObjects_[i]->update(ticks_);
-		SDL_Delay(100); //delay 100ms
-	}
+	tick_ = SDL_GetTicks();
+	player_.update(tick_);
+	player2_.update(tick_);
 }
 
 void Game::render() {
@@ -81,9 +73,8 @@ void Game::render() {
 	SDL_RenderClear(renderer_);
 
 	// Render player objects
-	for (auto i = 0; i != gameObjects_.size();i++) {
-		gameObjects_[i]->draw(renderer_);
-	}
+	player_.draw(renderer_);
+	player2_.draw(renderer_);
 
 	// Show the changes
 	SDL_RenderPresent(renderer_);
@@ -111,11 +102,7 @@ void Game::clean() {
 	cout << "Cleaning before exit..." << endl;
 	SDL_DestroyWindow(window_);
 	SDL_DestroyRenderer(renderer_);
-	
-	for (auto i = 0; i != gameObjects_.size();i++) {
-		gameObjects_[i]->clean();
-	}	
-
+	player_.clean();
 	running_ = false;
 	SDL_Quit();
 }

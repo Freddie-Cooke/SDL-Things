@@ -16,8 +16,8 @@ void GameObject::draw(SDL_Renderer* renderer) {
 	TextureManager::Instance()->drawFrame(textureID_, x_, y_, w_, h_, currentRow_, currentFrame_, renderer);
 }
 
-void GameObject::update(int ticks) {
-	x_++;
+void GameObject::update() {
+	//
 }
 
 void GameObject::clean() {

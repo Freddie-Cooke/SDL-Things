@@ -3,13 +3,9 @@
 
 #pragma once
 
-#include <vector>
-
 #include "SDL.h"
 #include "texturemanager.h"
 #include "player.h"
-#include "enemy.h"
-#include "gameobject.h"
 
 class Game {
 
@@ -39,9 +35,7 @@ class Game {
 		SDL_Renderer* renderer_;
 
 		// Game objects
-		std::vector<GameObject*> gameObjects_;
-		GameObject* player_;
-		GameObject* enemy_;
+		Player player_, player2_;
 
-		int ticks_;
+		int tick_;
 };

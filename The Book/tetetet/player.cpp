@@ -12,7 +12,7 @@ void Player::draw(SDL_Renderer* renderer) {
 }
 
 void Player::update(int ticks) {
-	GameObject::update(ticks);
+	GameObject::update();
 	currentFrame_ = int(((ticks / 100)%6));
 }
 

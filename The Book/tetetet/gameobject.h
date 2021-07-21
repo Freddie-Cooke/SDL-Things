@@ -14,13 +14,13 @@ class GameObject {
 
 	public:
 		// Create a new object
-		virtual void load(int x, int y, int w, int h, string textureID);
+		void load(int x, int y, int w, int h, string textureID);
 		// Draw the object to renderer
-		virtual void draw(SDL_Renderer* renderer);
+		void draw(SDL_Renderer* renderer);
 		// Updated the state of the game object
-		virtual void update(int ticks);
+		void update();
 		// Clean up memory
-		virtual void clean();
+		void clean();
 
 	protected:
 		// Inherited values

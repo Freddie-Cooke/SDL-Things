@@ -31,7 +31,7 @@ class TextureManager {
 		void draw(string id, int x, int y, int w, int h, SDL_Renderer* renderer_, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 		// Draw animated image
-		void drawFrame(string id, int x, int y, int w, int h, int currentRow, int currentFrame, SDL_Renderer* renderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
+		void drawFrame(string id, int x, int y, int w, int h, int currentRow, int currentFrame, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 	private:
 		TextureManager() {} // Only accessible through the current instance

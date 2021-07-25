@@ -49,23 +49,23 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	// Set renderer config
 	SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255); // Set renderer red
 
-	// Load image into texturemanager
+	// Load images into texturemanager
 	if (!(TextureManager::Instance()->load("assets/animal.png", "ani", renderer_))) {
 		cout << "Failed to load image" << endl;
 	}
 
 	// Load game objects
-	player_.load(0, 0, 96, 64, "ani");
-	player2_.load(100, 100, 96, 64, "ani");
+	gameObjects_.push_back(new Player(new LoaderParams(0, 0, 96, 64, "ani")));
 
 	cout << "Initilised successfully." << endl;
 	return true;
 }
 
 void Game::update() {
-	tick_ = SDL_GetTicks();
-	player_.update(tick_);
-	player2_.update(tick_);
+	for (auto i = 0; i != gameObjects_.size();i++) {
+		gameObjects_[i]->update();
+		SDL_Delay(100); //delay 100ms
+	}
 }
 
 void Game::render() {
@@ -73,8 +73,9 @@ void Game::render() {
 	SDL_RenderClear(renderer_);
 
 	// Render player objects
-	player_.draw(renderer_);
-	player2_.draw(renderer_);
+	for (auto i = 0; i != gameObjects_.size();i++) {
+		gameObjects_[i]->draw();
+	}
 
 	// Show the changes
 	SDL_RenderPresent(renderer_);
@@ -102,7 +103,11 @@ void Game::clean() {
 	cout << "Cleaning before exit..." << endl;
 	SDL_DestroyWindow(window_);
 	SDL_DestroyRenderer(renderer_);
-	player_.clean();
+	
+	for (auto i = 0; i != gameObjects_.size();i++) {
+		gameObjects_[i]->clean();
+	}	
+
 	running_ = false;
 	SDL_Quit();
 }
@@ -110,22 +115,20 @@ void Game::clean() {
 // Main
 int main(int argc, char* argv[]) {
 
-	Game* g_pGame = new Game();
-
-	if (!(g_pGame->init("Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false))) {
-		g_pGame->clean();
+	if (!(Game::Instance()->init("Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false))) {
+		Game::Instance()->clean();
 		cout << "did this";
 		return 0;
 	}
 
-	while (g_pGame->running()) {
+	while (Game::Instance()->running()) {
 		// Do things
-		g_pGame->handleEvents();
-		g_pGame->update();
-		g_pGame->render();
+		Game::Instance()->handleEvents();
+		Game::Instance()->update();
+		Game::Instance()->render();
 	}
 
-	g_pGame->clean();
+	Game::Instance()->clean();
 
 	return 0;
 }

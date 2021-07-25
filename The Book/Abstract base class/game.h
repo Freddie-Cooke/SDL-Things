@@ -3,13 +3,24 @@
 
 #pragma once
 
+#include <vector>
+
 #include "SDL.h"
 #include "texturemanager.h"
 #include "player.h"
+#include "enemy.h"
+#include "gameobject.h"
 
 class Game {
 
 	public:
+
+		static Game* Instance() {
+			if ( instance == 0) {
+				instance = new Game();
+			}
+			return instance;
+		}
 
 		// Initilise SDL Window Renderer
 		bool init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
@@ -24,6 +35,7 @@ class Game {
 
 		// Accessors
 		bool running() { return running_; }
+		SDL_Renderer* renderer() { return renderer_; }
 
 		// Mutators
 		void setRunning( bool value ) { running_ = value; }
@@ -35,7 +47,10 @@ class Game {
 		SDL_Renderer* renderer_;
 
 		// Game objects
-		Player player_, player2_;
+		std::vector<GameObject*> gameObjects_;
+		GameObject* player_;
+		GameObject* enemy_;
 
-		int tick_;
+		Game() {} // Singleton game cannot be accessed
+		static Game* instance;
 };

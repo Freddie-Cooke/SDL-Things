@@ -2,6 +2,7 @@
 // defines methods for drawing and loading textures
 
 #include "texturemanager.h"
+#include "game.h"
 
 TextureManager* TextureManager::instance = 0;
 
@@ -39,7 +40,7 @@ void TextureManager::draw(string id, int x, int y, int w, int h, SDL_Renderer* r
 	SDL_RenderCopyEx(renderer, texturemap_[id], &srcRect, &destRect, 0, 0, flip);
 }
 
-void TextureManager::drawFrame(string id, int x, int y, int w, int h, int currentRow, int currentFrame, SDL_Renderer* renderer, SDL_RendererFlip flip) {
+void TextureManager::drawFrame(string id, int x, int y, int w, int h, int currentRow, int currentFrame, SDL_RendererFlip flip) {
 
 	SDL_Rect srcRect, destRect;
 
@@ -53,5 +54,5 @@ void TextureManager::drawFrame(string id, int x, int y, int w, int h, int curren
 	destRect.y = y;
 
 	// Draw the current frame
-	SDL_RenderCopyEx(renderer, texturemap_[id], &srcRect, &destRect, 0, 0, flip);
+	SDL_RenderCopyEx(Game::Instance()->renderer(), texturemap_[id], &srcRect, &destRect, 0, 0, flip);
 }

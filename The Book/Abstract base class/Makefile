@@ -1,7 +1,7 @@
 # Makefile, Freddie Cooke
 # Compiling SDL2 main, SDL2_image
 
-OBJS = main.cpp texturemanager.cpp player.cpp gameobject.cpp
+OBJS = main.cpp game.cpp texturemanager.cpp sdlgameobject.cpp player.cpp enemy.cpp 
 
 CC = g++
 

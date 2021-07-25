@@ -6,27 +6,22 @@
 #include <iostream>
 #include <string>
 
-#include "SDL.h"
+#include "loaderparams.h"
 
 using namespace std;
 
 class GameObject {
 
 	public:
-		// Create a new object
-		void load(int x, int y, int w, int h, string textureID);
 		// Draw the object to renderer
-		void draw(SDL_Renderer* renderer);
+		virtual void draw() = 0;
 		// Updated the state of the game object
-		void update();
+		virtual void update() = 0;
 		// Clean up memory
-		void clean();
+		virtual void clean() = 0;
 
 	protected:
 		// Inherited values
-		int x_, y_;
-		int w_, h_;
-		string textureID_;
-		int currentRow_, currentFrame_;
+		GameObject(const LoaderParams* params) {}
+		virtual ~GameObject() {}
 };
-

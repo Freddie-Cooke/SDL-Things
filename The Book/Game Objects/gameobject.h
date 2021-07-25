@@ -29,4 +29,3 @@ class GameObject {
 		string textureID_;
 		int currentRow_, currentFrame_;
 };
-
